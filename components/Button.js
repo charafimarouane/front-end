@@ -23,10 +23,15 @@ export const ButtonStyle = css`
         color: #fff;
         border: 1px solid #fff; 
     `}
-    ${props => props.primary && css`
+    ${props => props.primary && !props.outline && css`
         background-color: #5542F6;
         color: #fff;
         border: 1px solid #5542F6; 
+    `}
+    ${props => props.primary && props.outline && css`
+        background-color: transparent;
+        border: 1px solid #5542F6; 
+        color: #5542F6;
     `}
     ${props => props.size === 'l' && css`
         font-size: 1.2rem;
@@ -37,7 +42,6 @@ export const ButtonStyle = css`
     `}
 
 `
-
 const StyledButton = styled.button`
         ${ButtonStyle}
 `
