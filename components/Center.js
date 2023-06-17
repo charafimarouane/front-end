@@ -1,15 +1,7 @@
-import { styled } from "styled-components"
-
-const StyledDiv = styled.div`
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-`
-
 export default function Center({children}){
     return(
-        <StyledDiv>
+        <div className="max-w-[800px] mt-0 mx-auto pt-0 pr-[20px]">
             {children}
-        </StyledDiv>
+        </div>
     )
 }

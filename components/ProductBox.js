@@ -1,63 +1,29 @@
-import { styled } from "styled-components"
+import { useContext } from "react"
 import Button from "./Button"
-import CartIcon from "./icons/CartIcon"
+import Link from "next/link"
+import { CartContext } from "./CartContext"
 
-const ProductWrapper = styled.div`
-
-`
-
-const WhiteBox = styled.div`
-    background-color: #fff;
-    padding:20px;
-    height:120px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    img{
-        max-width: 100%;
-        max-height: 80px;
-    }
-`
-const Title = styled.h2`
-    font-weight: normal;
-    font-size: .9rem;
-    margin: 0;
-`
-const ProductInfoBox = styled.div`
-    margin-top: 5px;
-`
-
-const PriceRow = styled.div`
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
-    margin-top: 2px;
-
-`
-const Price = styled.div`
-    font-size: 1.5rem;
-    font-weight: bold;
-`
-
-export default function ProductBox({_id,title,description,images,price}){
-    return(
-        <>
-            <ProductWrapper>
-                <WhiteBox>
+    export default function ProductBox({_id,title,description,images,price}){
+        const url = "/product/"+_id
+        const {addProduct} = useContext(CartContext)
+        return(
+            <div >
+                <Link className="bg-white p-[15px] h-[140px] items-center flex justify-center rounded-md" href={url}>
                     <div>
-                        <img src={images[0]} alt=""/>
+                        <img className="max-w-full max-h-[80px]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyrRGl4vtBuEjOi8twdJvNGW_J_j70Lu4Aw&usqp=CAU"/>
+                        {/* <img src={images[0]} alt=""/> */}
                     </div>
-                </WhiteBox>
-                <ProductInfoBox>
-                    <Title>{title}</Title>
-                    <PriceRow>
-                        <Price>${price}</Price>
-                        <Button primary outline><CartIcon/>Add to cart</Button>
-                    </PriceRow>
-                </ProductInfoBox>
-            </ProductWrapper>
-        </>
+                </Link>
+                <div className="mt-1">
+                    <Link className="text-inherit text-sm" href={url}>{title}</Link>
+                    <div className="flex items-center justify-between mt-[2px]">
+                        <h1 className="text-xl font-semibold">${price}</h1>
+                        <Button
+                            onClick={() => addProduct(_id)}
+                            className="bg-transparent border-2 border-green text-green text-xs px-2 rounded-md py-1">Add to cart</Button>
+                    </div>
+                </div>
+            </div>
+        
     )
 }

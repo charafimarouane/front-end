@@ -1,71 +1,51 @@
-import { styled } from "styled-components";
 import Center from "./Center";
 import Button from "./Button";
-import ButtonLink from "./ButtonLink";
 import Image from "next/image";
 import phone from "../IMG/phone.png"
 import CartIcon from "./icons/CartIcon";
-const Bg = styled.div`
-    background-color: #222;
-    color:#fff;
-    padding: 50px 0;
-`
-const Title = styled.h1`
-    margin: 0;
-    font-weight: normal;
-    font-size: 3rem;
-`
-const Desc = styled.p`
-    color:#aaa;
-    font-size: .8rem;
-`
-const ColumnsWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 40px; 
-    img{
-        max-width: 100%;
-    }
-`
-const Column = styled.div`
-    display: flex;
-    align-items: center;
-`
-const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 10px;
-    margin-top: 25px;
-`
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+import Link from "next/link";
+
 
 export default function Featured({product}){
+    const {addProduct} = useContext(CartContext)
+    function addFeaturedToCart(){
+        addProduct(product._id)
+    }
     return(
-        <Bg>
+    
+            <div className="bg-background text-white py-[50px]">
+
+            
             <Center>
-                <ColumnsWrapper>
-                    <Column>
-                        <div>
-                            <Title>{product.title}</Title>
-                            <Desc>{product.description}</Desc>
-                            <ButtonsWrapper>
-                                <ButtonLink
+    
+                <div className="grid grid-cols-2 gap-[40px]">
+                    
+                        <div className="flex flex-col items-start">
+                            <h1 className="mb-4 text-[48px]">{product.title}</h1>
+                            <p className="text-par text-sm ">{product.description}</p>
+                            <div className="flex gap-1 mt-[25px]">
+                                <Link
+                                    className="bg-transparent border border-white px-4 rounded-md py-2"
                                     href ={'/product/'+product._id}
-                                    outline={1}
-                                    white={1} 
-                                    size={'l'}
-                                    >Read more</ButtonLink>
-                                <Button primary={1} size={'l'}>
+                                >Read more
+                                </Link>
+                                <Button className="bg-white text-btnColor flex px-4 py-2 gap-2 rounded-md" onClick={addFeaturedToCart}>
                                     <CartIcon/>
                                     Add to cart
                                 </Button>
-                            </ButtonsWrapper>    
+                            </div>    
                         </div>
-                    </Column>
-                    <Column>
+                    
+                    <div className="mx-auto">
                         <Image src={phone} alt=""/>
-                    </Column>
-                </ColumnsWrapper>
+                    </div>
+                    </div>
+    
             </Center>
-        </Bg>
+            </div>
+    
     )
 
 }
