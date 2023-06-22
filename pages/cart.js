@@ -4,12 +4,19 @@ import Center from "@/components/Center";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import axios from "axios";
-import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 
 export default function cartPage(){
     const {cartProducts, addProduct, removeProduct} = useContext(CartContext)
     const [products, setProducts] = useState([])
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [city, setCity] = useState('')
+    const [postalcode, setPostalCode] = useState('')
+    const [adress, setAdress] = useState('')
+    const [country, setCountry] = useState('')
+
     useEffect(()=>{
         if (cartProducts.length > 0) {
             axios.post('/api/cart', {ids:cartProducts}).then(
@@ -27,6 +34,13 @@ export default function cartPage(){
     function lessOfThisProduct(id){
         removeProduct(id)
     }
+    async function goToPayement(){
+        const response = await axios.post('/api/checkout', {
+         name,email,city,postalcode,adress,country,cartProducts,})
+        if (response.data.url) {
+            window.location = response.data.url
+        }
+    }
     let total = 0
     for( const productId of cartProducts){
         const price = products.find(p => p._id === productId)?.price || 0
@@ -34,19 +48,9 @@ export default function cartPage(){
     }
 
     
-    const formik = useFormik({
-        initialValues:{
-            name:'',
-            email:'',
-            city:'',
-            postalcode:'',
-            country:'',
-            adress:'',
-            products:'',
-            
-        }
-    })
-    // console.log(formik.values);
+ 
+    // console.log(formik);
+    // const data = formik.values
 
     return(
      <>
@@ -55,7 +59,7 @@ export default function cartPage(){
             <div className="flex gap-4 mt-12">
                 <div className="bg-white rounded-md w-2/3 p-[30px]">
                 <h2>Cart</h2>
-
+                   
                     {!cartProducts?.length && (
                         <div>
                             Your cart is empty
@@ -103,47 +107,42 @@ export default function cartPage(){
                 {!!cartProducts?.length && (
                         <div className="bg-white rounded-md w-1/3 p-[30px]">
                             <h2 className="font-bold text-lg mb-2">Order informations</h2>
-                            <form method="post" action="/api/checkout">
                                 <Input placeholder="Name" 
                                        type="text"
                                        name="name"
-                                       value={formik.values.name} 
-                                       onChange={formik.handleChange}/>
+                                       value={name} 
+                                       onChange={ev => setName(ev.target.value)}/>
                                 <Input placeholder="Email" 
                                        type="text"
                                        name="email"
-                                       value={formik.values.email}
-                                       onChange={formik.handleChange}/>
+                                       value={email}
+                                       onChange={ev => setEmail(ev.target.value)}/>
                                 <div className="flex gap-2">
                                     <Input placeholder="City" 
                                            type="text"
                                            name="city"
-                                           value={formik.values.city} 
-                                           onChange={formik.handleChange}/>
+                                           value={city} 
+                                           onChange={ev => setCity(ev.target.value)}/>
                                     <Input placeholder="Postal Code" 
                                            type="text"
-                                           name="postalCode"
-                                           value={formik.values.postalcode} 
-                                           onChange={formik.handleChange}/>
+                                           name="postalcode"
+                                           value={postalcode} 
+                                           onChange={ev => setPostalCode(ev.target.value)}/>
                                 </div>
                                 <Input placeholder="Street Adress" 
                                        type="text"
                                        name="adress"
-                                       value={formik.values.adress}
-                                       onChange={formik.handleChange}/>
+                                       value={adress}
+                                       onChange={ev => setAdress(ev.target.value)}/>
                                 <Input placeholder="Country" 
                                        type="text"
                                        name="country"
-                                       value={formik.values.country} 
-                                       onChange={formik.handleChange}/>
-                                <Input hidden 
-                                       name="products"
-                                       value={cartProducts.join(',')}
-                                       />
+                                       value={country} 
+                                       onChange={ev => setCountry(ev.target.value)}/>
+                                
                                 <Button className="block bg-green rounded-md px-2 py-1 text-white w-full"
-                                    type="submit"
-                                >Continue to payement</Button>
-                            </form>
+                                    onClick={goToPayement} 
+                                >Continue to payement</Button> 
                         </div>
                     
                 )}
