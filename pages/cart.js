@@ -7,7 +7,7 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
 export default function cartPage(){
-    const {cartProducts, addProduct, removeProduct} = useContext(CartContext)
+    const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext)
     const [products, setProducts] = useState([])
 
     const [name, setName] = useState('')
@@ -17,6 +17,7 @@ export default function cartPage(){
     const [adress, setAdress] = useState('')
     const [country, setCountry] = useState('')
 
+    const [isSuccess, setIsSuccess] = useState(false)
     useEffect(()=>{
         if (cartProducts.length > 0) {
             axios.post('/api/cart', {ids:cartProducts}).then(
@@ -27,6 +28,16 @@ export default function cartPage(){
         }
     },[cartProducts])
 
+    useEffect(()=>{
+        if (typeof window === 'undefined') {
+            return ;
+        }
+        if (window.location.href.includes('success')) {
+            setIsSuccess(true)
+            clearCart()
+        }
+    },[])
+
     function moreOfThisProduct(id){
         addProduct(id)
     }
@@ -34,6 +45,7 @@ export default function cartPage(){
     function lessOfThisProduct(id){
         removeProduct(id)
     }
+
     async function goToPayement(){
         const response = await axios.post('/api/checkout', {
          name,email,city,postalcode,adress,country,cartProducts,})
@@ -41,16 +53,25 @@ export default function cartPage(){
             window.location = response.data.url
         }
     }
+
     let total = 0
     for( const productId of cartProducts){
         const price = products.find(p => p._id === productId)?.price || 0
         total += price
     }
 
-    
- 
-    // console.log(formik);
-    // const data = formik.values
+    if (isSuccess) {
+        return(
+            <Header>
+                <Center>
+                    <div>
+                        <h1>Thanks for your order!</h1>
+                        <p>We will email you when your order will be sent.</p>
+                    </div>
+                </Center>
+            </Header>
+        )
+    }
 
     return(
      <>

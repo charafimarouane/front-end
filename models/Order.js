@@ -8,7 +8,8 @@ const OrderSchema = new Schema({
     postalcode: String,
     adress: String,
     paid: Boolean,
-
+},{
+    timestamps:true,
 })
 
 export const Order = models?.Order || model('Order', OrderSchema)
