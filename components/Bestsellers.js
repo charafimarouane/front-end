@@ -1,5 +1,4 @@
 import CardProduct from "./Cardproduct";
-import { headerStyle } from "@/lib/styles";
 export default function Bestsellers(){
      
     return(

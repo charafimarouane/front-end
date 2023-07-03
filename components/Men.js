@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Gallery from "./Gallery";
 
 export default function Men(){
@@ -7,19 +8,19 @@ export default function Men(){
             <div className="container mx-auto">
             <div className="grid grid-cols-3 gap-3">
                 <div className="gallery bg-[url('../IMG/clothes.jpg')]">
-                    <button className="">Clothes</button>
+                    <Link id="link" href={'/mclothes'} className="">Clothes</Link>
                 </div>
                 <div className="gallery row-span-2 bg-[url('../IMG/menbags.jpg')] ">
-                    <button className="">Bags</button>
+                    <Link id="link" href={'/mbags'} className="">Bags</Link>
                 </div>
                 <div className="gallery bg-[url('../IMG/menunderclothes.jpg')] ">   
-                    <button className="">Underwear</button>
+                    <Link id="link" href={'/munderwear'} className="">Underwear</Link>
                 </div>
                 <div className=" gallery bg-[url('../IMG/messhoes.jpg')]">
-                    <button className="">Shoes</button>
+                    <Link id="link" href={'/mshoes'} className="">Shoes</Link>
                 </div>
                 <div className="gallery bg-[url('../IMG/menothers.jpg')]">
-                    <button className="">Other</button>
+                    <Link id="link" href={'/mother'} className="">Other</Link>
                 </div>    
             </div>
         </div>
