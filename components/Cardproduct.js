@@ -2,13 +2,14 @@ import Image from "next/image";
 import phone from "../IMG/phone.png"
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
+import Link from "next/link";
 
 export default function CardProduct({_id,title,description,images,price}){
-    const url = "/sweater/"+_id
+    const url = "/product/"+_id
     const {addProduct} = useContext(CartContext)
 
     return(
-        <div className="w-fit mx-auto">
+        <Link href={url} className="w-fit mx-auto">
             <div>
                 <Image src={phone}/>
             </div>
@@ -19,6 +20,6 @@ export default function CardProduct({_id,title,description,images,price}){
                     Add to cart
                 </button>               
             </div>
-        </div>
+        </Link>
     )
 }

@@ -1,7 +1,6 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
-import Center from "@/components/Center";
-import Header from "@/components/Header";
+import Layout from "@/components/Layout";
 import CartIcon from "@/components/icons/CartIcon";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
@@ -10,9 +9,8 @@ import { useContext } from "react";
 export default function ProductPage({product}){
     const {addProduct} = useContext(CartContext)
     return (
-        <>
-            <Header/>
-            <Center>
+        <div className="container mx-auto">
+            <Layout>
                 <div className="flex gap-7 mt-10">
                     <div className="bg-white p-[35px] w-1/3   items-center flex justify-center rounded-md">
                         <img className="w-[100%]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyrRGl4vtBuEjOi8twdJvNGW_J_j70Lu4Aw&usqp=CAU"/>
@@ -26,8 +24,8 @@ export default function ProductPage({product}){
                         </div>
                     </div>
                 </div>
-            </Center>
-        </>
+            </Layout>
+        </div>
     )
 }
 
