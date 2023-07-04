@@ -1,12 +1,11 @@
 import Bar from '@/components/Bar';
 import Bestsellers from '@/components/Bestsellers';
+import Discount from '@/components/Discount';
 import Featured from '@/components/Featured'
-import Footer from '@/components/Footer';
-import Header from '@/components/Header'
 import Kids from '@/components/Kids';
 import Layout from '@/components/Layout';
 import Men from '@/components/Men';
-import Newproducts from '@/components/NewProducts';
+import Offer from '@/components/Offer';
 import Women from '@/components/Women';
 import { mongooseConnect } from '@/lib/mongoose'
 import { Product } from '@/models/Product'
@@ -22,7 +21,9 @@ export default function Home({featuredProduct, newProducts}) {
         <Women/>
         <Men/>
         <Kids/>
+        <Discount/>
         <Bar/>
+        <Offer/>
       </Layout>
       
       {/* <Newproducts newProducts={newProducts} /> */}

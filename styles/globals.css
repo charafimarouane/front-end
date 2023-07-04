@@ -31,3 +31,10 @@ div .gallery {
 .bar p {
   @apply text-lg ;
 }
+
+#discount p {
+  @apply text-lg tracking-wide my-2;
+}
+#discount li {
+  @apply text-lg font-semibold;
+}

@@ -1,5 +1,4 @@
 import CardProduct from "./Cardproduct";
-import ProductBox from "./ProductBox";
 
 export default function ProductsGrid({products}){
     return(
