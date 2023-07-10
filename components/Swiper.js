@@ -1,9 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Image from 'next/image';
 import phone from "../IMG/phone.png"
-// Import Swiper styles
 import 'swiper/css';
-// import 'swiper/css/autoplay'
 import { Autoplay } from 'swiper';
 export default () => {
   return (
@@ -14,8 +12,8 @@ export default () => {
       loop={true}
       autoplay={{'delay':3500}}
       navigation={true}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log('slide change')}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide>
       <div className="flex bg-background h-[50vh] ">
@@ -40,7 +38,6 @@ export default () => {
       </SwiperSlide>
       <SwiperSlide>Slide 3</SwiperSlide>
       <SwiperSlide>Slide 4</SwiperSlide>
-      ...
     </Swiper>
   );
 };

@@ -15,8 +15,6 @@ module.exports = {
         btnColor: "#000",
         primarybtn:"#0D3D29",
         green:"#539165",
-
-        
       }
     },
   },

@@ -38,3 +38,6 @@ div .gallery {
 #discount li {
   @apply text-lg font-semibold;
 }
+/* #option {
+  @apply h-[20px];
+} */

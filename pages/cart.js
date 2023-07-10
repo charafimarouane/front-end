@@ -1,13 +1,13 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
-import Center from "@/components/Center";
-import Header from "@/components/Header";
 import Input from "@/components/Input";
+import Layout from "@/components/Layout";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
 export default function cartPage(){
     const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext)
+   
     const [products, setProducts] = useState([])
 
     const [name, setName] = useState('')
@@ -18,13 +18,23 @@ export default function cartPage(){
     const [country, setCountry] = useState('')
 
     const [isSuccess, setIsSuccess] = useState(false)
+
     useEffect(()=>{
-        if (cartProducts.length > 0) {
-            axios.post('/api/cart', {ids:cartProducts}).then(
-                respons => {setProducts(respons.data)}
-            )
-        }else{
-            setProducts([])
+        if (cartProducts.length > 0) {            
+            const fetchProductData = async () => {
+                const productData = []
+                for(const item of cartProducts) {
+                    const response = await axios.post('/api/cart', {ids:item.productId})
+                    const product = response.data
+                    const productWithSelection = {...product, size: item.size, color: item.color, quantity: item.quantity}
+                    productData.push(productWithSelection)
+
+                }
+                setProducts(productData)
+            }
+            fetchProductData()
+        }else if (products.length === 0){
+                clearCart()
         }
     },[cartProducts])
 
@@ -38,12 +48,8 @@ export default function cartPage(){
         }
     },[])
 
-    function moreOfThisProduct(id){
-        addProduct(id)
-    }
-
-    function lessOfThisProduct(id){
-        removeProduct(id)
+    function lessOfThisProduct(id,size, color, quantity){
+        removeProduct(id, size, color, quantity)
     }
 
     async function goToPayement(){
@@ -53,30 +59,30 @@ export default function cartPage(){
             window.location = response.data.url
         }
     }
-
+    
     let total = 0
-    for( const productId of cartProducts){
-        const price = products.find(p => p._id === productId)?.price || 0
-        total += price
+    for( const prod of products){
+        const quantity = prod.quantity 
+        const price = prod[0].price
+        total += price * quantity
     }
 
     if (isSuccess) {
         return(
-            <Header>
-                <Center>
+            <div className="container ">
+            <Layout>
                     <div>
                         <h1>Thanks for your order!</h1>
                         <p>We will email you when your order will be sent.</p>
                     </div>
-                </Center>
-            </Header>
+            </Layout>
+            </div>
         )
     }
 
     return(
-     <>
-        <Header/>
-        <Center>
+     <div className="container mx-auto">
+        <Layout>
             <div className="flex gap-4 mt-12">
                 <div className="bg-white rounded-md w-2/3 p-[30px]">
                 <h2>Cart</h2>
@@ -86,41 +92,38 @@ export default function cartPage(){
                             Your cart is empty
                         </div>
                     )}
-                    {products?.length > 0 && (
+                    {cartProducts?.length > 0 && (
                         <table className="w-full">
                             <thead>
                                 <tr>
                                     <th className="text-left uppercase text-par font-medium text-[12px]">Product</th>
+                                    <th className="text-left uppercase text-par font-medium text-[12px]">Size</th>
+                                    <th className="text-left uppercase text-par font-medium text-[12px]">Color</th>
                                     <th className="text-left uppercase text-par font-medium text-[12px]">Quantity</th>
                                     <th className="text-left uppercase text-par font-medium text-[12px]">Price</th>
+                                    <th className="text-left uppercase text-par font-medium text-[12px]">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {products.map(product => (
-                                <tr key={product._id}>
-                                    <td className="pt-4">
-                                        <div className="w-[100px] h-[100px] p-[10px] border border-gray-300 rounded-md flex justify-center items-center">
-                                            <img className="max-w-[80px] max-h-[80px]" src={product.images[0]}/>
-                                        </div>
-                                        {product.title}
-                                    </td>
-                                    <td className="">
-                                        <div className="flex justify-start gap-2">
-                                            <Button onClick={() => lessOfThisProduct(product._id)} className="px-2 border border-gray-500 rounded-sm">-</Button>
-                                            <span className="text-center">
-                                            {cartProducts.filter(id => id === product._id).length}
-                                            </span>
-                                            <Button onClick={() => moreOfThisProduct(product._id)} className="px-2 border border-gray-500 rounded-sm">+</Button>
-                                        </div>
-                                    </td>
-                                    <td>${cartProducts.filter(id => id === product._id).length * product.price}</td>
+                                {products.map((prod, index) => (                                    
+                                    <tr key={index}>
+                                        <td>{prod[0].title}</td>
+                                        <td>{prod.size}</td>
+                                        <td>{prod.color}</td>
+                                        <td>{prod.quantity}</td>
+                                        <td>${prod[0].price * prod.quantity}</td>
+                                        <td>
+                                            <button onClick={() => lessOfThisProduct(prod[0]._id, prod.size, prod.color, prod.quantity)}>remove</button>
+                                        </td>
+                                    </tr>
+                                ))}     
+                                <tr>
+                                    <td>Total</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>${total}</td>
                                 </tr>
-                            ))}
-                            <tr>
-                                <td>Total</td>
-                                <td></td>
-                                <td>${total}</td>
-                            </tr>
                             </tbody>
                         </table>
                     )}
@@ -161,14 +164,14 @@ export default function cartPage(){
                                        value={country} 
                                        onChange={ev => setCountry(ev.target.value)}/>
                                 
-                                <Button className="block bg-green rounded-md px-2 py-1 text-white w-full"
+                                <Button className="block bg-secoundary rounded-md px-2 py-2 font-semibold text-white w-full"
                                     onClick={goToPayement} 
                                 >Continue to payement</Button> 
                         </div>
                     
                 )}
             </div>
-        </Center>
-     </>
+        </Layout>
+     </div>
     )
 }

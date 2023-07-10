@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext,useEffect,useState } from "react";
 
 export const CartContext = createContext({})
@@ -6,10 +7,12 @@ export default function CartContextProvider({children}){
     //chack if we are on client side
     const ls = typeof window !== 'undefined' ? window.localStorage : null ;
     const [cartProducts, setCartProducts] = useState([])
-    //fetching data with condition     
+    // const [products, setProducts] = useState([])
+    //
     useEffect(()=>{
         if (cartProducts?.length > 0) {
             ls.setItem('cart', JSON.stringify(cartProducts) )
+            
         }
     },[cartProducts])
 
@@ -19,22 +22,30 @@ export default function CartContextProvider({children}){
         }
     },[])
     
-    function addProduct(productId){
-        setCartProducts(prev => [...prev,productId] )
+    function addProduct(productId, size, color, quantity){
+        const newProduct = {
+            productId,
+            size,
+            color,
+            quantity}
+        setCartProducts(prev => [...prev, newProduct] )
     }   
     
-    function removeProduct(productId){
+    function removeProduct(productId, size, color, quantity) {
         setCartProducts(prev => {
-            const pos = prev.indexOf(productId)
-            if (pos != -1) {
-                return prev.filter((value,index) => index !== pos)
-            }
-            return prev
-        })
-    }
+          const updatedCart = [...prev];
+          const index = updatedCart.findIndex(item => item.productId === productId && item.size === size && item.color === color && item.quantity === quantity);
+          if (index !== -1) {
+            updatedCart.splice(index, 1);
+          }
+          return updatedCart;
+        });
+      }
     
     function clearCart(){
-        setCartProducts([])
+        if (ls) {
+            ls.removeItem('cart');
+          }
     }
     
     return(
