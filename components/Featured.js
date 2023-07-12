@@ -1,21 +1,10 @@
-import Center from "./Center";
-import Button from "./Button";
-import Image from "next/image";
-import phone from "../IMG/phone.png"
-import CartIcon from "./icons/CartIcon";
-import { useContext } from "react";
-import { CartContext } from "./CartContext";
-import Link from "next/link";
 import Slider from "./Swiper"
 
 
 export default function Featured({product}){
-    const {addProduct} = useContext(CartContext)
-    function addFeaturedToCart(){
-        addProduct(product._id)
-    }
+
     return(    
-        <Slider/>
+        <Slider product={product}/>
     )
 
 }

@@ -7,7 +7,7 @@ import { CartContext } from "./CartContext";
 export default function Header(){
     const {cartProducts} = useContext(CartContext)
     return(
-        <header className="bg-background pb-1 border-b-2 border-black">
+        <header className="bg-background pb-1 border-b-2 border-black px-8">
             <div className="">
                 <div className="flex justify-between pt-6">
                     <Link href={'/home'}>Bershito</Link>

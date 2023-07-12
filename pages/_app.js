@@ -1,4 +1,5 @@
 import CartContextProvider from "@/components/CartContext"
+import  FavContextProvider  from "@/components/FavContext"
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }) {
@@ -6,7 +7,9 @@ export default function App({ Component, pageProps }) {
     <>
   
       <CartContextProvider>
-        <Component {...pageProps} />
+        <FavContextProvider>
+          <Component {...pageProps} />
+        </FavContextProvider>
       </CartContextProvider>
       
     </>

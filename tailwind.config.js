@@ -9,7 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        background: "#fbfbfb",
+        background: "#faf9f8",
+        secbackgorund:"#e4e4e4",
         secoundary:"#040404",
         par: "#aaa",
         btnColor: "#000",

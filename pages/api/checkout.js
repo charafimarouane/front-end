@@ -1,6 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Order } from "@/models/Order";
-import { Product } from "@/models/Product";
 const stripe = require('stripe')(process.env.STRIPE_SK) 
 
 
@@ -10,28 +9,27 @@ export default async function handler(req, res){
         return;
     }
 
-    const {name,email,city,postalcode,country,adress,cartProducts} = req.body
+    const {name,email,city,postalcode,country,adress,products} = req.body
 
     await mongooseConnect()
-    const productsIds = cartProducts
-    const uniqueIds = [...new Set(productsIds)]
-    const productsInfos = await Product.find({_id:uniqueIds})
 
     let line_items = []
-    for( const productId of uniqueIds ){
-        const productinfo = productsInfos.find(p => p._id.toString() === productId)
-        const quantity = productsIds.filter(id => id === productId)?.length || 0 
-        if (quantity > 0 && productinfo) {
+    for( const product of products ){
+        const quantity = product.quantity
+        if (quantity > 0 ) {
             line_items.push({
                 quantity,
                 price_data:{
                     currency: 'USD',
-                    product_data: {name: productinfo.title },
-                    unit_amount: quantity * productinfo.price * 100,
+                    product_data: {
+                        name: product[0].title,
+                        },
+                    unit_amount:  product[0].price * 100 ,
                 } 
             })
         }
     }
+    console.log(line_items);
 
     const orderDoc = await Order.create({
         line_items,name,email,city,postalcode,adress,country,paid:false,

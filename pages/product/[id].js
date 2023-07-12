@@ -1,5 +1,6 @@
 import { CartContext } from "@/components/CartContext";
 import Layout from "@/components/Layout";
+import ProductImages from "@/components/ProductImages";
 import CartIcon from "@/components/icons/CartIcon";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
@@ -23,11 +24,11 @@ export default function ProductPage({product}){
     }
     
     return (
+        <Layout>
         <div className="container mx-auto">
-            <Layout>
                 <div className="flex gap-7 mt-10 ">
                     <div className="bg-white p-[35px] w-2/3   items-center flex justify-center rounded-md">
-                        <img className="w-[100%]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyrRGl4vtBuEjOi8twdJvNGW_J_j70Lu4Aw&usqp=CAU"/>
+                        <ProductImages images={product.images}/>
                     </div>
                     <div className="w-1/3 p-3 bg-background rounded-md">
                         <div className="flex flex-col space-y-2 my-8">
@@ -65,8 +66,8 @@ export default function ProductPage({product}){
                         </div>
                     </div>
                 </div>
-            </Layout>
         </div>
+        </Layout>
     )
 }
 

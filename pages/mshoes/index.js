@@ -18,7 +18,9 @@ export default function sweaterPage({products}){
 export async function getServerSideProps(){
     await mongooseConnect()
     const categoryID = '64a26dde45948d644a8fad5a';
+    
     const products = await Product.find({category: categoryID}).exec()
+    
     return {
         props:{
             products: JSON.parse(JSON.stringify(products))

@@ -10,24 +10,24 @@ import Women from '@/components/Women';
 import { mongooseConnect } from '@/lib/mongoose'
 import { Product } from '@/models/Product'
 
-
+{/* <Newproducts newProducts={newProducts} /> */}
 export default function Home({featuredProduct, newProducts}) {
 
   return (
-    <div className='container mx-auto'>
       <Layout>
-        <Featured product={featuredProduct}/>
-        <Bestsellers/>
-        <Women/>
-        <Men/>
-        <Kids/>
-        <Discount/>
-        <Bar/>
-        <Offer/>
+        <div className='container mx-auto font-sans'>
+            <Featured product={newProducts}/>
+            <Bestsellers/>
+            <Women/>
+            <Men/>
+            <Kids/>
+            <Discount/>
+            <Bar/>
+            <Offer/>
+        </div>
       </Layout>
       
-      {/* <Newproducts newProducts={newProducts} /> */}
-    </div>
+      
        )
 }
 

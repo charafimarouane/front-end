@@ -1,7 +1,6 @@
 export default function Footer(){
     return(
-      <>
-        <footer className="bg-background text-center text-secoundary lg:text-left mt-12">
+        <footer className="bg-secbackgorund text-center text-secoundary lg:text-left mt-12 px-8">
           <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 lg:justify-between">
             <div className="mr-12 hidden lg:block">
               <span>Get connected with us on social networks:</span>
@@ -69,10 +68,8 @@ export default function Footer(){
             </div>
           </div>
 
-          {/* <!-- Main container div: holds the entire content of the footer, including four sections (Tailwind Elements, Products, Useful links, and Contact), with responsive styling and appropriate padding/margins. --> */}
           <div className="mx-6 py-10 text-center md:text-left">
             <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-              {/* <!-- Tailwind Elements section --> */}
               <div className="">
                 <h6
                   className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
@@ -92,7 +89,6 @@ export default function Footer(){
                   elit.
                 </p>
               </div>
-              {/* <!-- Products section --> */}
               <div className="">
                 <h6
                   className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
@@ -119,7 +115,6 @@ export default function Footer(){
                   >
                 </p>
               </div>
-              {/* <!-- Useful links section --> */}
               <div className="">
                 <h6
                   className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
@@ -146,7 +141,6 @@ export default function Footer(){
                   >
                 </p>
               </div>
-              {/* <!-- Contact section --> */}
               <div>
                 <h6
                   className="mb-4 flex justify-center font-semibold uppercase md:justify-start">
@@ -208,8 +202,7 @@ export default function Footer(){
             </div>
           </div>
 
-          {/* <!--Copyright section--> */}
-          <div className="bg-background p-6 text-center">
+          <div className="bg-secbackgorund p-6 text-center">
             <span>© 2023 Copyright:</span>
             <a className="font-semibold text-secoundary"
               href="https://tailwind-elements.com/"
@@ -217,6 +210,6 @@ export default function Footer(){
             >
           </div>
         </footer>
-      </>
+
     )
 }
