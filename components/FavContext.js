@@ -1,43 +1,44 @@
 import { createContext, useEffect, useState } from "react";
 
-export const FavContext = createContext({})
+export const FavContext = createContext({});
 
-export default function FavContextProvider({children}){
-    const ls = typeof window !== 'undefined'? window.localStorage : null 
-    const [favProducts , setFavProducts] = useState([])
+export function FavContextProvider({ children }) {
+  const ls = typeof window !== "undefined" ? window.localStorage : null;
+  const [favProducts, setFavProducts] = useState([]);
 
-    useEffect(()=>{
-        if (favProducts?.length > 0) {
-            ls.setItem('favoris', JSON.stringify(favProducts))   
-        }
-    },[favProducts])
-
-    useEffect(()=>{
-        if (ls && ls.getItem('favoris')) {
-            setFavProducts(JSON.parse(localStorage.getItem('favoris')))
-        }
-    },[])
-
-    function addToFavoris(productId){
-        setFavProducts(prev => [...prev, productId])
+  useEffect(() => {
+    if (favProducts?.length > 0) {
+      ls?.setItem("favoris", JSON.stringify(favProducts));
+    }else{
+        ls?.removeItem("favoris")
     }
+  }, [favProducts, ls]);
 
-    function removeFavoris(productId) {
-        setFavProducts(prev => {
-          const pos = prev.indexOf(productId);
-          if (pos !== -1) {
-            return prev.filter((value,index) => index !== pos);
-          }
-          return prev;
-        });
-      }
-      function clearFavoris() {
-        setFavProducts([]);
-      }
+  useEffect(() => {
+    if (ls && ls.getItem("favoris")) {
+      setFavProducts(JSON.parse(ls.getItem("favoris")));
+    }
+  }, [ls]);
 
-    return(
-        <FavContext.Provider value={{favProducts, setFavProducts, addToFavoris, removeFavoris, clearFavoris}}>
-            {children}
-        </FavContext.Provider>
-    )
+  function addProduct(productId) {
+    setFavProducts((prev) => [...prev, productId]);
+  }
+
+  function removeProduct(productId) {
+    setFavProducts((prev) => prev.filter((value) => value !== productId));
+  }
+
+  function clear() {
+    setFavProducts([]);
+    ls?.removeItem("favoris")
+  }
+
+  return (
+    <FavContext.Provider
+      value={{ favProducts, addProduct, removeProduct, clear }}
+    >
+      {children}
+    </FavContext.Provider>
+  );
 }
+

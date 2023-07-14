@@ -18,7 +18,7 @@ export default function cartPage(){
     const [country, setCountry] = useState('')
 
     const [isSuccess, setIsSuccess] = useState(false)
-    console.log(products);
+    
     useEffect(()=>{
         if (cartProducts.length > 0) {            
             const fetchProductData = async () => {
@@ -83,7 +83,7 @@ export default function cartPage(){
     return(
     <Layout>
      <div className="container mx-auto">
-            <h2 className="text-4xl font-semibold mt-[70px] text-center"> Shopping bag</h2>
+            <h2 className="text-4xl font-semibold mt-[50px] "> Shopping bag</h2>
             <div className="flex gap-4 mt-8">
                 <div className="bg-white rounded-md w-2/3 p-[30px] shadow-md ">
                    
