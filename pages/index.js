@@ -21,7 +21,7 @@ export default function Home({featuredProduct, newProducts}) {
             <Women/>
             <Men/>
             <Kids/>
-            <Discount/>
+            {/* <Discount/> */}
             <Bar/>
             <Offer/>
         </div>

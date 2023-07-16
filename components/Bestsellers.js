@@ -45,21 +45,3 @@ export default function Bestsellers({product}){
         </>
     )
 }
-
-// export async function getServerSideProps(){
-//     await mongooseConnect();
-//     const newProducts = await Product.find({}, null, {sort: {'_id':-1}})
-//     console.log(newProducts);
-//     const latestProducts = await Product.find()
-//   .sort({ createdAt: -1 })
-//   .limit(4)
-//   .lean();
-
-// console.log(latestProducts);
-//     return{
-//       props: {
-//         newProducts: JSON.parse(JSON.stringify(newProducts)),
-//         latestProducts: JSON.parse(JSON.stringify(latestProducts)),
-//       }
-//     };
-//   }

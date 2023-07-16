@@ -19,7 +19,6 @@ export default function SearchPage() {
         console.error(error);
       }
     };
-
     // Only fetch products if the search term is provided
     if (term) {
       fetchProducts();
@@ -27,18 +26,22 @@ export default function SearchPage() {
       setProducts([]);
     }
   }, [term]);
-  
 
   return (
     <Layout>
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 h-[60vh]">
       <h1 className="text-2xl font-semibold mb-12">
         Search Results for "{term}"
       </h1>
       <div className="grid grid-cols-4 gap-6">
-        {products?.map((product) => (
-          <CardProduct key={product._id} {...product} />
-        ))}
+        {products.length < 1 && 
+          <h1 className="text-2xl">sorry we cant find "{term}" </h1>
+        }
+        {products && 
+          products?.map((product) => (
+            <CardProduct key={product._id} {...product} />
+          ))
+        }
       </div>
     </div>
     </Layout>

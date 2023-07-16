@@ -1,6 +1,8 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
 import Input from "@/components/Input";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+
 import Layout from "@/components/Layout";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
@@ -52,13 +54,20 @@ export default function cartPage(){
         removeProduct(id, size, color, quantity)
     }
 
-    async function goToPayement(){
+    async function goToPayment(values) {
         const response = await axios.post('/api/checkout', {
-         name,email,city,postalcode,adress,country,products})
+          name: values.name,
+          email: values.email,
+          city: values.city,
+          postalcode: values.postalcode,
+          adress: values.adress,
+          country: values.country,
+          products,
+        });
         if (response.data.url) {
-            window.location = response.data.url
+          window.location = response.data.url;
         }
-    }
+      }
     
     let total = 0
     for( const prod of products){
@@ -134,49 +143,98 @@ export default function cartPage(){
                     )}
                 </div>
                 {!!cartProducts?.length && (
-                        <div className="bg-white rounded-md w-1/3 p-[30px] shadow-md">
-                            <h2 className="font-bold text-lg mb-2">Order informations</h2>
-                                <Input placeholder="Name" 
-                                       type="text"
-                                       name="name"
-                                       value={name} 
-                                       onChange={ev => setName(ev.target.value)}/>
-                                <Input placeholder="Email" 
-                                       type="text"
-                                       name="email"
-                                       value={email}
-                                       onChange={ev => setEmail(ev.target.value)}/>
-                                <div className="flex gap-2">
-                                    <Input placeholder="City" 
-                                           type="text"
-                                           name="city"
-                                           value={city} 
-                                           onChange={ev => setCity(ev.target.value)}/>
-                                    <Input placeholder="Postal Code" 
-                                           type="text"
-                                           name="postalcode"
-                                           value={postalcode} 
-                                           onChange={ev => setPostalCode(ev.target.value)}/>
-                                </div>
-                                <Input placeholder="Street Adress" 
-                                       type="text"
-                                       name="adress"
-                                       value={adress}
-                                       onChange={ev => setAdress(ev.target.value)}/>
-                                <Input placeholder="Country" 
-                                       type="text"
-                                       name="country"
-                                       value={country} 
-                                       onChange={ev => setCountry(ev.target.value)}/>
-                                
-                                <Button className="block bg-secoundary rounded-md px-2 py-2 font-semibold text-white w-full"
-                                    onClick={goToPayement} 
-                                >Continue to payement</Button> 
-                        </div>
-                    
-                )}
+            <div className="bg-white rounded-md w-1/3 p-[30px] shadow-md">
+                <h2 className="font-bold text-lg mb-2">Order informations</h2>
+                <Formik
+                    initialValues={{
+                    name: '',
+                    email: '',
+                    city: '',
+                    postalcode: '',
+                    adress: '',
+                    country: '',
+                    }}
+                    validate={(values) => {
+                        const errors = {};
+                        if (!values.name) {
+                          errors.name = 'Name is required';
+                        }
+                        if (!values.email) {
+                          errors.email = 'Email is required';
+                        }
+                        if (!values.city) {
+                          errors.city = 'City is required';
+                        }
+                        if (!values.postalcode) {
+                          errors.postalcode = 'Postal Code is required';
+                        }
+                        if (!values.adress) {
+                          errors.adress = 'Street Address is required';
+                        }
+                        if (!values.country) {
+                          errors.country = 'Country is required';
+                        }
+                        return errors;
+                      }}
+                    onSubmit={goToPayment}
+                >
+                    <Form>
+                    <Field
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        className="py-4 px-2 block w-full rounded-md my-2 border border-gray-400"
+                    />
+                    <ErrorMessage name="name" component="div" className="text-red-500" />
+                    <Field
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                    />
+                    <ErrorMessage name="email" component="div" className="text-red-500" />
+                    <div className="flex gap-2 my-2">
+                        <Field
+                        type="text"
+                        name="city"
+                        placeholder="City"
+                        className="py-4 px-2 block w-full border rounded-md border-gray-400"
+                        />
+                        <ErrorMessage name="city" component="div" className="text-red-500" />
+                        <Field
+                        type="text"
+                        name="postalcode"
+                        placeholder="Postal Code"
+                        className="py-4 px-2 block w-full border rounded-md  border-gray-400"
+                        />
+                        <ErrorMessage name="postalcode" component="div" className="text-red-500" />
+                    </div>
+                    <Field
+                        type="text"
+                        name="adress"
+                        placeholder="Street Adress"
+                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                    />
+                    <ErrorMessage name="adress" component="div" className="text-red-500" />
+                    <Field
+                        type="text"
+                        name="country"
+                        placeholder="Country"
+                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                    />
+                    <ErrorMessage name="country" component="div" className="text-red-500" />
+                    <Button
+                        className=" mt-2 block bg-secoundary rounded-md px-2 py-4 font-semibold text-white w-full"
+                        type="submit"
+                    >
+                        Continue to payment
+                    </Button>
+                    </Form>
+                </Formik>
+                </div>
+            )}
             </div>
-     </div>
+        </div>
     </Layout>
     )
 }
