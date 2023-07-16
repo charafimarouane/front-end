@@ -17,7 +17,7 @@ export default function Home({featuredProduct, newProducts}) {
       <Layout>
         <div className='container mx-auto font-sans'>
             <Featured product={newProducts}/>
-            <Bestsellers/>
+            <Bestsellers product={featuredProduct}/>
             <Women/>
             <Men/>
             <Kids/>
@@ -32,7 +32,7 @@ export default function Home({featuredProduct, newProducts}) {
 }
 
 export async function getServerSideProps(){
-  const featuredProductId = '6487f380bb3637478b2a69d0';
+  const featuredProductId = '64ad95786ed39639f4283269';
   await mongooseConnect();
   const featuredProduct = await Product.findById(featuredProductId)
   const newProducts = await Product.find({}, null, {sort: {'_id':-1}})

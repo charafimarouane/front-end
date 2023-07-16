@@ -1,6 +1,4 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Image from 'next/image';
-import phone from "../IMG/phone.png"
 import 'swiper/css';
 import { Autoplay } from 'swiper';
 import Link from 'next/link';
@@ -18,8 +16,8 @@ export default ({product}) => {
     >
 
       {product.map((pro)=>(
-        <SwiperSlide>
-        <div className="flex bg-background h-[50vh] " key={pro._id}>
+        <SwiperSlide  key={pro._id}>
+        <div className="flex bg-background h-[50vh] ">
               <div className="flex flex-col justify-center ml-[150px]">
                   <h5 className="text-red-600 text-[18px]">Big Sale</h5>
                   <h1 className="text-[54px] tracking-wider">{pro.title}</h1>

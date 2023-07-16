@@ -1,17 +1,42 @@
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
+import { useRouter } from "next/router";
 
 
 
 export default function Header(){
     const {cartProducts} = useContext(CartContext)
+    const router = useRouter();
+    const [searchTerm, setSearchTerm] = useState("");
+  
+    const handleChange = (e) => {
+      setSearchTerm(e.target.value);
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (searchTerm.trim() !== "") {
+        router.push(`/search?term=${encodeURIComponent(searchTerm)}`);
+      }
+    };
+    
+  
+
     return(
-        <header className="bg-background pb-1 border-b-2 border-black px-8">
-            <div className="">
-                <div className="flex justify-between pt-6">
-                    <Link href={'/home'}>Bershito</Link>
-                    <input type="text" className="border border-gray-400 rounded-md px-2" placeholder="Search"/>
+        <header className="bg-secoundary pb-1 border-b-2 border-black px-8 text-background">
+            <div className="relative">
+                <div className="flex justify-between py-5">
+                    <Link href={'/home'} className="text-2xl">Bershito</Link>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleChange}
+                        className="border text-secondary w-[400px] text-black border-gray-400 rounded-md px-2 focus:outline-none"
+                        placeholder="Search"
+                        />
+                    </form>
                     <div className="flex space-x-4">
                         <Link href={'/favoris'}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -33,11 +58,11 @@ export default function Header(){
                         </Link>
                     </div>
                 </div>
-                <div className="flex space-x-20 justify-center mt-5 font-semibold">
+                {/* <div className="flex space-x-20 justify-center mt-5 font-semibold">
                     <Link href={'/'}>Women</Link>
                     <Link href={'/'}>Men</Link>
                     <Link href={'/'}>Kids</Link>
-                </div>
+                </div> */}
             </div>
         </header>
     )
