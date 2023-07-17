@@ -5,14 +5,14 @@ import { Product } from "@/models/Product";
 
 export default function sweaterPage({products}){
     return (
+    <Layout>
         <div className="container mx-auto">
-            <Layout>
             <h1 className="text-[32px] mt-6 mb-12">Others</h1>
             <div className="">
                 <ProductsGrid products={products}/>
             </div>
-            </Layout>
         </div>
+    </Layout>
     )
 }
 export async function getServerSideProps(){

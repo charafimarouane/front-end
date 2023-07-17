@@ -6,14 +6,14 @@ import { Product } from "@/models/Product";
 
 export default function sweaterPage({products}){
     return (
+    <Layout>
         <div className="container mx-auto">
-            <Layout>
             <h1 className="text-4xl font-semibold mt-[70px] text-center mb-12 ">Sweaters</h1>
             <div className="">
                 <ProductsGrid products={products}/>
             </div>
-            </Layout>
         </div>
+    </Layout>
     )
 }
 export async function getServerSideProps(){

@@ -26,7 +26,7 @@ export default function Favoris() {
   return (
     <Layout>
       <div className="container mx-auto h-[60vh]">
-        <h1 className="text-4xl font-semibold mt-[50px] mb-8 ">favoris</h1>
+        <h1 className="text-4xl font-semibold mt-[50px] mb-8 ">Favoris</h1>
             {!favProducts?.length && (
             <div className="bg-white rounded-md w-2/3 p-[30px] shadow-md ">
                 <div className="py-6">
