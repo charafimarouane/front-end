@@ -1,23 +1,17 @@
 import Button from "@/components/Button";
 import { CartContext } from "@/components/CartContext";
-import Input from "@/components/Input";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-
+import * as Yup from "yup";
 import Layout from "@/components/Layout";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 
 export default function cartPage(){
-    const {cartProducts, addProduct, removeProduct, clearCart} = useContext(CartContext)
+    const {cartProducts, removeProduct, clearCart} = useContext(CartContext)
    
     const [products, setProducts] = useState([])
 
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [city, setCity] = useState('')
-    const [postalcode, setPostalCode] = useState('')
-    const [adress, setAdress] = useState('')
-    const [country, setCountry] = useState('')
+
 
     const [isSuccess, setIsSuccess] = useState(false)
     
@@ -91,7 +85,7 @@ export default function cartPage(){
 
     return(
     <Layout>
-     <div className="container mx-auto">
+     <div className="container mx-auto min-h-[50vh]">
             <h2 className="text-4xl font-semibold mt-[50px] "> Shopping bag</h2>
             <div className="flex gap-4 mt-8">
                 <div className="bg-white rounded-md w-2/3 p-[30px] shadow-md ">
@@ -106,10 +100,10 @@ export default function cartPage(){
                         <div className="w-full">
                                 {products.map((prod, index) => (
                                 <div className="flex my-3 ">
-                                    <div className="w-1/3">
-                                        <img className="w-[200px] mx-auto" src={prod[0].images[0]}/>
+                                    <div className="w-1/3 ">
+                                        <img className="w-[100px] mx-auto" src={prod[0].images[0]}/>
                                     </div>
-                                    <div key={index} className="flex flex-col w-2/3 p-3">
+                                    <div key={index} className="flex flex-col w-2/3 p-3 ">
                                         <div className="flex justify-between ">
                                             <div>
                                                 <h2 className="text-lg font-semibold">{prod[0].title}</h2>
@@ -143,7 +137,7 @@ export default function cartPage(){
                     )}
                 </div>
                 {!!cartProducts?.length && (
-            <div className="bg-white rounded-md w-1/3 p-[30px] shadow-md">
+            <div className="bg-white rounded-md w-1/3 p-[30px] shadow-md max-h-fit">
                 <h2 className="font-bold text-lg mb-2">Order informations</h2>
                 <Formik
                     initialValues={{
@@ -154,28 +148,14 @@ export default function cartPage(){
                     adress: '',
                     country: '',
                     }}
-                    validate={(values) => {
-                        const errors = {};
-                        if (!values.name) {
-                          errors.name = 'Name is required';
-                        }
-                        if (!values.email) {
-                          errors.email = 'Email is required';
-                        }
-                        if (!values.city) {
-                          errors.city = 'City is required';
-                        }
-                        if (!values.postalcode) {
-                          errors.postalcode = 'Postal Code is required';
-                        }
-                        if (!values.adress) {
-                          errors.adress = 'Street Address is required';
-                        }
-                        if (!values.country) {
-                          errors.country = 'Country is required';
-                        }
-                        return errors;
-                      }}
+                    validationSchema={Yup.object({
+                        name: Yup.string().required('Name is required'),
+                        email: Yup.string().email('Invalid email address').required('Email is required'),
+                        city: Yup.string().required('City is required'),
+                        postalcode: Yup.string().required('Postal Code is required'),
+                        adress: Yup.string().required('Street Address is required'),
+                        country: Yup.string().required('Country is required'),
+                      })}
                     onSubmit={goToPayment}
                 >
                     <Form>
@@ -183,46 +163,50 @@ export default function cartPage(){
                         type="text"
                         name="name"
                         placeholder="Name"
-                        className="py-4 px-2 block w-full rounded-md my-2 border border-gray-400"
+                        className="py-4 px-2 block w-full rounded-md mt-2 border border-gray-400"
                     />
-                    <ErrorMessage name="name" component="div" className="text-red-500" />
+                    <ErrorMessage name="name" component="div" className="text-red-500 font-semibold text-sm px-1" />
                     <Field
                         type="text"
                         name="email"
                         placeholder="Email"
-                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                        className="py-4 px-2 block w-full border rounded-md mt-2 border-gray-400"
                     />
-                    <ErrorMessage name="email" component="div" className="text-red-500" />
-                    <div className="flex gap-2 my-2">
-                        <Field
-                        type="text"
-                        name="city"
-                        placeholder="City"
-                        className="py-4 px-2 block w-full border rounded-md border-gray-400"
-                        />
-                        <ErrorMessage name="city" component="div" className="text-red-500" />
-                        <Field
-                        type="text"
-                        name="postalcode"
-                        placeholder="Postal Code"
-                        className="py-4 px-2 block w-full border rounded-md  border-gray-400"
-                        />
-                        <ErrorMessage name="postalcode" component="div" className="text-red-500" />
+                    <ErrorMessage name="email" component="div" className="text-red-500 font-semibold text-sm px-1" />
+                    <div className="flex gap-2 mt-2 w-full">
+                        <div className="flex flex-col w-1/2">
+                            <Field
+                            type="text"
+                            name="city"
+                            placeholder="City"
+                            className="py-4 px-2  border rounded-md border-gray-400"
+                            />
+                            <ErrorMessage name="city" component="div" className="text-red-500 font-semibold text-sm px-1" />
+                        </div>
+                        <div className="flex flex-col w-1/2">
+                            <Field
+                            type="text"
+                            name="postalcode"
+                            placeholder="Postal Code"
+                            className="py-4 px-2 border rounded-md  border-gray-400"
+                            />
+                            <ErrorMessage name="postalcode" component="div" className="text-red-500 font-semibold text-sm px-1" />
+                        </div>
                     </div>
                     <Field
                         type="text"
                         name="adress"
                         placeholder="Street Adress"
-                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                        className="py-4 px-2 block w-full border rounded-md mt-2 border-gray-400"
                     />
-                    <ErrorMessage name="adress" component="div" className="text-red-500" />
+                    <ErrorMessage name="adress" component="div" className="text-red-500 font-semibold text-sm px-1" />
                     <Field
                         type="text"
                         name="country"
                         placeholder="Country"
-                        className="py-4 px-2 block w-full border rounded-md my-2 border-gray-400"
+                        className="py-4 px-2 block w-full border rounded-md mt-2 border-gray-400"
                     />
-                    <ErrorMessage name="country" component="div" className="text-red-500" />
+                    <ErrorMessage name="country" component="div" className="text-red-500 font-semibold text-sm px-1" />
                     <Button
                         className=" mt-2 block bg-secoundary rounded-md px-2 py-4 font-semibold text-white w-full"
                         type="submit"
