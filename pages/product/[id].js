@@ -16,8 +16,8 @@ export default function ProductPage({ product }) {
       <div className="container mx-auto">
         <Formik
           initialValues={{
-            selectedOption: product.properties.size[0],
-            selectedColor: product.properties.color[0],
+            selectedOption: product.properties?.size[0],
+            selectedColor: product.properties?.color[0],
             selectedValue: 1
           }}
           validate={values => {
