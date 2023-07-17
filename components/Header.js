@@ -2,6 +2,9 @@ import Link from "next/link";
 import { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
 import { useRouter } from "next/router";
+import logo from '../IMG/bershito.png';
+import Image from "next/image";
+
 
 
 
@@ -27,8 +30,10 @@ export default function Header(){
         <header className="bg-secoundary  px-8 text-background">
             <div className="relative">
                 <div className="flex justify-between py-5">
-                    <Link href={'/'} className="text-2xl">Bershito</Link>
-                    <form onSubmit={handleSubmit}>
+                    <Link href={'/'} className="text-2xl my-auto">
+                        <Image src={logo}  width={200} height={200}/>
+                    </Link>
+                    <form onSubmit={handleSubmit} className=" flex items-center space-x-2">
                         <input
                         type="text"
                         value={searchTerm}
@@ -36,6 +41,11 @@ export default function Header(){
                         className="border text-secondary w-[400px] text-black border-gray-400 rounded-md text-lg font-semibold py-1 px-2 focus:outline-none"
                         placeholder="Search"
                         />
+                        <button type="submit" className="">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                            </svg>
+                        </button>
                     </form>
                     <div className="flex items-center space-x-4">
                         <Link href={'/favoris'}>
@@ -58,23 +68,7 @@ export default function Header(){
                         </Link>
                     </div>
                 </div>
-                {/* <div className="flex space-x-20 justify-center mt-5 font-semibold">
-                    <Link href={'/'}>Women</Link>
-                    <Link href={'/'}>Men</Link>
-                    <Link href={'/'}>Kids</Link>
-                </div> */}
             </div>
         </header>
     )
 }
-
-{/* <div className="flex justify-between pt-[20px] pr-0">
-<Link className="text-white" href={'/'}>Ecommerce</Link>
-<div className="flex gap-5">
-    <Link className="text-par" href={'/'}>Home</Link>
-    <Link className="text-par" href={'/products'}>All products</Link>
-    <Link className="text-par" href={'/categories'}>Categories</Link>
-    <Link className="text-par" href={'/account'}>Account</Link>
-    <Link className="text-par" href={'/cart'}>Cart ({cartProducts.length})</Link>
-</div>
-</div> */}
