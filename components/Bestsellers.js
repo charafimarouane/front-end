@@ -5,8 +5,8 @@ export default function Bestsellers({product}){
      
     return(
         <>
-            <h1 className="text-[42px] font-medium text-center mb-12">Best Sellers</h1>
-            <div className="grid grid-cols-4 gap-7 mb-[150px] container ">
+            <h1 className="md:text-[42px] text-[32px] font-medium text-center md:mb-12 mb-4">Best Sellers</h1>
+            <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-2 mb-[150px] items-center">
                 
                     <CardProduct
                     // key={prod._id}

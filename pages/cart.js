@@ -85,10 +85,10 @@ export default function cartPage(){
 
     return(
     <Layout>
-     <div className="container mx-auto min-h-[50vh]">
+     <div className="md:container px-4 mx-auto min-h-[50vh]">
             <h2 className="text-4xl font-semibold mt-[50px] "> Shopping bag</h2>
-            <div className="flex gap-4 mt-8">
-                <div className="bg-white rounded-md w-2/3 p-[30px] shadow-md ">
+            <div className="md:flex flex-col gap-4 mt-8">
+                <div className="bg-white rounded-md md:w-2/3 p-[30px] shadow-md ">
                    
                     {!cartProducts?.length && (
                         <div className=" py-6">
@@ -100,7 +100,7 @@ export default function cartPage(){
                         <div className="w-full">
                                 {products.map((prod, index) => (
                                 <div className="flex my-3 ">
-                                    <div className="w-1/3 ">
+                                    <div className="md:w-1/3 ">
                                         <img className="w-[100px] mx-auto" src={prod[0].images[0]}/>
                                     </div>
                                     <div key={index} className="flex flex-col w-2/3 p-3 ">
@@ -137,7 +137,7 @@ export default function cartPage(){
                     )}
                 </div>
                 {!!cartProducts?.length && (
-            <div className="bg-white rounded-md w-1/3 p-[30px] shadow-md max-h-fit">
+            <div className="bg-white rounded-md mt-2 md:w-1/3 p-[30px] shadow-md max-h-fit">
                 <h2 className="font-bold text-lg mb-2">Order informations</h2>
                 <Formik
                     initialValues={{

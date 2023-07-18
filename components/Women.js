@@ -3,13 +3,13 @@ import Link from "next/link";
 export default function Women(){
     return(
         <>
-            <h1 className="text-[42px] font-medium text-center mb-12">Women Collection</h1>
+            <h1 className="md:text-[42px] text-[32px]  font-medium text-center mb-12">Women Collection</h1>
             <div className="container mx-auto">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-3">
                     <div className="gallery bg-women-sweaters">
                         <Link id="link" href={'/wsweaters'} className="">Cardigans and sweaters</Link>
                     </div>
-                    <div className="gallery row-span-3 bg-[url('../IMG/dresses.jpg')]">
+                    <div className="gallery lg:row-span-3 bg-[url('../IMG/dresses.jpg')]">
                         <Link id="link" href={'/wdresses'} className="">Dresses</Link>
                     </div>
                     <div className="gallery bg-[url('../IMG/tshirt.jpg')]">   

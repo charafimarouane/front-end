@@ -33,7 +33,7 @@ export default function SearchPage() {
       <h1 className="text-2xl font-semibold mb-12">
         Search Results for "{term}"
       </h1>
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
         {products.length < 1 && 
           <h1 className="text-2xl">sorry we cant find "{term}" </h1>
         }
