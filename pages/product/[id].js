@@ -13,7 +13,7 @@ export default function ProductPage({ product }) {
 
   return (
     <Layout>
-      <div className="container mx-auto">
+      <div className="md:container mx-auto px-4">
         <Formik
           initialValues={{
             selectedOption: product.properties?.size[0],
@@ -47,11 +47,11 @@ export default function ProductPage({ product }) {
         >
           {({ isSubmitting }) => (
             <Form>
-              <div className="flex gap-7 mt-10 ">
-                <div className="bg-white p-[35px] w-2/3   items-center flex justify-center rounded-md shadow-md">
+              <div className="md:flex md:gap-7 mt-10 ">
+                <div className="bg-white p-[35px] md:w-2/3 items-center flex justify-center rounded-md shadow-md">
                   <ProductImages images={product.images} />
                 </div>
-                <div className="w-1/3 p-3 bg-white rounded-md shadow-md">
+                <div className="md:w-1/3 p-3 bg-white rounded-md shadow-md">
                   <div className="flex flex-col space-y-2 my-8">
                     <h1 className="text-3xl font-semibold capitalize ">
                       {product.title}
