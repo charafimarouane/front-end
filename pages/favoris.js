@@ -25,10 +25,10 @@ export default function Favoris() {
 
   return (
     <Layout>
-      <div className="container mx-auto h-[60vh]">
+      <div className="md:container px-4 mx-auto min-h-[50vh]">
         <h1 className="text-4xl font-semibold mt-[50px] mb-8 ">Favoris</h1>
             {!favProducts?.length && (
-            <div className="bg-white rounded-md w-2/3 p-[30px] shadow-md ">
+            <div className="bg-white rounded-md md:w-2/3 p-[30px] shadow-md ">
                 <div className="py-6">
                     <h1 className="text-2xl font-semibold">Your favoris is empty!</h1>
                     <p className="text-[14px] mt-2">Add products in your favoris.</p>

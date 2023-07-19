@@ -1,4 +1,3 @@
-import CardProduct from "@/components/Cardproduct";
 import Layout from "@/components/Layout";
 import ProductsGrid from "@/components/ProductsGrid";
 import { mongooseConnect } from "@/lib/mongoose";
@@ -7,8 +6,8 @@ import { Product } from "@/models/Product";
 export default function sweaterPage({products}){
     return (
     <Layout>
-        <div className="container mx-auto">
-            <h1 className="text-4xl font-semibold mt-[70px] text-center mb-12 ">Sweaters</h1>
+        <div className="container mx-auto min-h-[50vh]">
+            <h1 className="text-[32px] mt-6 mb-12 px-4">Sweaters</h1>
             <div className="">
                 <ProductsGrid products={products}/>
             </div>

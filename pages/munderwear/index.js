@@ -6,8 +6,8 @@ import { Product } from "@/models/Product";
 export default function sweaterPage({products}){
     return (
     <Layout>
-        <div className="container mx-auto">
-            <h1 className="text-[32px] mt-6 mb-12">Underwear</h1>
+        <div className="container mx-auto min-h-[50vh]">
+            <h1 className="text-[32px] mt-6 mb-12 px-4">Underwear</h1>
             <div className="">
                 <ProductsGrid products={products}/>
             </div>

@@ -87,7 +87,7 @@ export default function cartPage(){
     <Layout>
      <div className="md:container px-4 mx-auto min-h-[50vh]">
             <h2 className="text-4xl font-semibold mt-[50px] "> Shopping bag</h2>
-            <div className="md:flex  gap-4 mt-8">
+            <div className="md:flex gap-4 mt-8">
                 <div className="bg-white rounded-md md:w-2/3 p-[30px] shadow-md ">
                    
                     {!cartProducts?.length && (
