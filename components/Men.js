@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Men(){
     return(
-        <div className="mt-[150px] ">
+        <div className="md:mb-24 mb-8 px-2">
             <h1 className="md:text-[42px] text-[32px]  font-medium text-center mb-12 ">Men Collection</h1>
             <div className="container mx-auto">
             <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-3">

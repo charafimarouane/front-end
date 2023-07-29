@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Women(){
     return(
-        <>
-            <h1 className="md:text-[42px] text-[32px]  font-medium text-center mb-12">Women Collection</h1>
-            <div className="container mx-auto">
+        <div className="md:mb-24 mb-8">
+            <h1 className="md:text-[42px] text-[32px] font-medium text-center mb-12 ">Women Collection</h1>
+            <div className="container mx-auto px-2">
             <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-3">
                     <div className="gallery bg-women-sweaters">
                         <Link id="link" href={'/wsweaters'} className="">Cardigans and sweaters</Link>
@@ -29,6 +29,6 @@ export default function Women(){
                     </div>
             </div>
         </div>
-        </>
+        </div>
     )
 }

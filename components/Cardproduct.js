@@ -14,7 +14,7 @@ export default function CardProduct({_id,title,description,images,price}){
         }
     }
     return(
-        <div className="w-fit mx-auto ">
+        <div className="md:w-fit mx-auto ">
             <div className="">
                 <Link href={url}>
                     <img src={images?.[0]} className="h-[450px] min-w-[250px]"/>

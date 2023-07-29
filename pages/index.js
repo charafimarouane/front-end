@@ -14,8 +14,8 @@ export default function Home({featuredProduct, newProducts}) {
 
   return (
       <Layout>
-        <div className='container mx-auto font-sans'>
             <Featured product={newProducts}/>
+        <div className='container mx-auto font-sans'>
             <Bestsellers product={featuredProduct}/>
             <Women/>
             <Men/>

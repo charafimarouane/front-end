@@ -42,11 +42,11 @@ const Contact = () => {
     console.log(formik.touched);
 
     return (
-    <div id='contact' className='md:flex justify-around py-20 monter '>
+    <div id='contact' className='md:flex justify-around py-20  '>
       <div className='md:w-full max-w-md mt-8 mx-auto mb-20 md:mx-4 w-[300px] '> 
-          <h1 className='text-3xl font-bold md:border-l-4 mx-auto pl-2 my-5 Color text-secoundary md:text-left text-center border-secoundary w-[200px] md:w-full'>Contact Us</h1>
-          <p className='dark:text-colorPar text-black/70  md:text-left text-center my-10  '>We would love to hear from you! If you have any questions or comments, please feel free to reach out to us using the contact information below. We are always happy to chat and help in any way we can. </p>
-          <p className='dark:text-colorPar text-black/70  md:text-left text-center my-10  '>Alternatively, you can fill out the form on this page and we will get back to you as soon as possible.
+          <h1 className='text-3xl font-bold md:border-l-4 mx-auto pl-2 my-5  text-secoundary md:text-left text-center border-secoundary w-[200px] md:w-full'>Contact Us</h1>
+          <p className=' text-black/70  md:text-left text-center my-10  '>We would love to hear from you! If you have any questions or comments, please feel free to reach out to us using the contact information below. We are always happy to chat and help in any way we can. </p>
+          <p className=' text-black/70  md:text-left text-center my-10  '>Alternatively, you can fill out the form on this page and we will get back to you as soon as possible.
                 Thank you for visiting our website and we look forward to connecting with you! </p>
          <div className='flex flex-row justify-center my-12 space-x-12'>
           <a href="https://www.linkedin.com/company/morocoder/">{SvgContact.Linkedin}</a>
@@ -108,7 +108,7 @@ const Contact = () => {
                 {formik.touched.message && formik.errors.message ? <p className='text-red-600'>{formik.errors.message}</p> : null}
           </div>
          <div className='flex justify-start pb-5 my-3'>
-         <button type='submit' className='w-full h-[40px] capitalize rounded-lg font-bold text-white bg-secotext-secoundary'>submit</button>
+         <button type='submit' className='w-full h-[40px] capitalize rounded-lg font-bold text-white bg-secoundary'>submit</button>
          </div>
   
       </form>

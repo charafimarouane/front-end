@@ -93,7 +93,7 @@ export default function cartPage(){
                     {!cartProducts?.length && (
                         <div className=" py-6">
                             <h1 className="text-2xl font-semibold">Your shopping bag is empty!</h1>
-                            <p className="text-[14px] mt-2">Sign in to save or access saved items in your shopping bag.</p>
+                            <p className="text-[14px] mt-2">Sign in to save or access saved items to shopping bag.</p>
                         </div>
                     )}
                     {cartProducts?.length > 0 && (

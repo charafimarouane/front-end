@@ -3,15 +3,30 @@
 @tailwind utilities;
  
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
 body{
   /* font-family: 'Roboto', sans-serif; */
   background-color: #fbfbfb;
   padding: 0; 
   margin: 0;
+}
+.line{
+  position: relative;
+}
+.line::after{
+  content: "";
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* Adjust the width of the line as needed */
+  border-bottom: 2px solid #000;
+}
 
+.heading{
+  font-family: 'Great Vibes', cursive;
 }
 
 td{
@@ -19,7 +34,7 @@ td{
   
 }
 div .gallery {
-  @apply min-w-full min-h-[250px] rounded-lg w-1/2 text-center flex justify-center bg-cover bg-no-repeat bg-center;
+  @apply min-w-full min-h-[350px] rounded-lg w-1/2 text-center flex justify-center bg-cover bg-no-repeat bg-center;
 
   
 }

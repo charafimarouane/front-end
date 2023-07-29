@@ -16,6 +16,7 @@ module.exports = {
         btnColor: "#000",
         primarybtn:"#0D3D29",
         green:"#539165",
+        pink:"#eb89a6"
       },
       backgroundImage:{
         'women-sweaters': "url('../IMG/sweaters.jpg')",
